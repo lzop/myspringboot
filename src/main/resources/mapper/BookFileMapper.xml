@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luo.mapper.BookFileMapper">
+
+    <resultMap id="bookFileResult" type="com.luo.entity.BookFile">
+        <id property="id" column="id"/>
+        <result property="bookId" column="book_id"/>
+        <result property="path" column="path"/>
+        <association property="book" javaType="com.luo.entity.Book">
+            <id property="id" column="book_id"/>
+            <result property="bookName" column="book_book_name"/>
+            <result property="bookSummary" column="book_book_summary"/>
+            <result property="author" column="book_author"/>
+            <result property="remark" column="book_remark"/>
+        </association>
+    </resultMap>
+
+    <select id="selectBookFile" resultMap="bookFileResult" parameterType="int">
+        select file_tb.id,file_tb.book_id,file_tb.path,book.id as book_id,book.book_name as book_book_name,book.book_summary as book_book_summary,book.author as book_author,book.remark as book_remark
+        from file_tb
+        left join book on file_tb.book_id = book.id
+        where file_tb.id = #{id}
+    </select>
+
+</mapper>

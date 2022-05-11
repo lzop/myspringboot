@@ -1,0 +1,55 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: myspringboot
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.43.127:3306/myspringboot?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  aop:
+    proxy-target-class: false
+#
+#  redis:
+#    host: 192.168.43.127
+#    port: 6379
+#    database: 0
+#    timeout: 3000
+#    lettuce:
+#      pool:
+#        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+#        max-active: 8
+#        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+#        max-wait: -1
+#        # 连接池中的最大空闲连接 默认 8
+#        max-idle: 8
+#        # 连接池中的最小空闲连接 默认 0
+#        min-idle: 0
+#
+mybatis:
+  type-aliases-package: com.luo.entity
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.luo: debug
+    org.springframework: warn
+#
+#
+## token 存活时间
+#token:
+#  expire: 3600000
+#  key: 123456
