@@ -16,20 +16,11 @@ public class LogConfig {
     public void logs() {
     }
 
-
     @Around(value = "logs()")
-    public Object myLog(ProceedingJoinPoint pjp) {
-        log.info("Target:{},Args:{},This:{}", pjp.getTarget(), pjp.getArgs(), pjp.getThis());
-
-        Object o = null;
-
-        try {
-            o = pjp.proceed();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-
-        return o;
+    public Object myLog(ProceedingJoinPoint pjp) throws Throwable {
+        log.info("请求目的方法:{}.{}", pjp.getSignature().getDeclaringTypeName(), pjp.getSignature().getName());
+        log.info("请求参数:{}", pjp.getArgs());
+        return pjp.proceed();
     }
 
 }
