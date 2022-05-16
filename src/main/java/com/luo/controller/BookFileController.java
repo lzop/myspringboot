@@ -45,4 +45,16 @@ public class BookFileController {
         }
     }
 
+    @DeleteMapping(value = "/delete")
+    public ResultResponse delete(@RequestParam(value = "id") Integer id) {
+        if (id > 0) {
+            BookFile bookFile = bookFileService.getById(id);
+            boolean remove = bookFileService.removeById(id);
+            return remove ? ResultResponse.error("删除失败") : ResultResponse.success(bookFile);
+        } else {
+            return ResultResponse.error(ExceptionEnum.BODY_NOT_MATCH);
+        }
+    }
+
+
 }

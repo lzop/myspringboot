@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Slf4j
@@ -27,6 +28,12 @@ public class BookController {
         } else {
             return ResultResponse.error(ExceptionEnum.BODY_NOT_MATCH);
         }
+    }
+
+    @GetMapping(value = "/gets")
+    public ResultResponse getBooks(Book book) {
+        List<Book> books = bookService.getBooks(book);
+        return ResultResponse.success(books);
     }
 
     @PostMapping(value = "/add")

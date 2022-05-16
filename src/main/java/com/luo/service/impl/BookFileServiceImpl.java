@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -52,7 +53,7 @@ public class BookFileServiceImpl extends ServiceImpl<BookFileMapper, BookFile> i
             //文件下载
             File file = new File(bookFile.getPath());
 
-            response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
+            response.setHeader("Content-Disposition", "attachment;filename=" + UUID.randomUUID().toString() + "\\." + file.getName().split("\\.")[file.getName().split("\\.").length - 1]);
             response.setContentType("application/force-download");
             response.setCharacterEncoding("utf-8");
 
